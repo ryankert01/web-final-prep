@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<script>
+    var turn = 0;
+    var size = 4;
+
+    var a = new Array(size);
+
+    for (var i = 0; i < size; i++)
+        a[i] = new Array(size);
+
+
+
+    function put(event) {
+        if ((typeof event == "undefined") || (!event))
+            event = window.event;
+        var e1 = event.target || event.srcElement;
+
+    }
+
+    function init() {
+        var table = document.createElement("TABLE");
+        document.body.appendChild(table);
+        table.border = "2";
+        table.cellSpacing = "2";
+        table.bgColor = "#eeeeee";
+        table.align = "center";
+
+        var x, y, num1 = 1;
+
+        for (x = 0; x < size; x++) {
+            r = table.insertRow(x);
+            for (y = 0; y < size; y++) {
+                c = r.insertCell(y);
+                c.width = "50";
+                c.height = "50";
+                c.name = num1;
+                num1++;
+                c.id = c.name;
+                c.vAlign = "center";
+                c.align = "center";
+                c.onclick = put;
+                //c.innerHTML="aaa";
+
+                c.appendChild(document.createTextNode(c.name));
+            }
+        }
+
+    }
+</script>
+
+<body onload="init()">
+
+</body>
+
+</html>

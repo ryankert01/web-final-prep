@@ -1,0 +1,251 @@
+<html>
+
+<head>
+    <script>
+        var x_value = 200,
+            y_value = 440;
+        var x_move1 = 2,
+            y_move1 = -2;
+
+        var xsize = 6,
+            ysize = 3;
+
+        var Tx, Ty;
+
+        var Hits = new Array();
+        for (var i = 0; i < xsize; i++)
+            Hits[i] = new Array(xsize);
+
+        /*
+        function getdiv(id1,x2,y2,w2,h2,color2){
+        document.writeln("<div id='"+id1+"' style='visibility:visible;position:absolute;top:"+y2+";left:"+x2+";width:"+w2+";height:"+h2+";background:"+color2+";font-size:1px'></div>");
+        }
+        */
+        function getdiv(id1, x2, y2, w2, h2, color2) {
+
+            var newElement = document.createElement('div');
+
+            newElement.id = id1;
+
+            newElement.style.position = "absolute";
+
+            newElement.style.top = y2;
+            newElement.style.left = x2;
+
+            newElement.style.width = w2;
+            newElement.style.height = h2;
+
+            newElement.style.background = color2;
+            newElement.style.visibility = "visible";
+
+            document.body.appendChild(newElement);
+
+
+        }
+
+
+        function handleClick(e) {
+
+            if ((typeof e == "undefined") || (!e))
+                e = window.event;
+
+            var mouseX = e.clientX;
+            var mouseY = e.clientY;
+
+            document.getElementById("div1").style.left = mouseX - 50;
+            //document.getElementById("div1").style.top = mouseY-10;
+
+            //getdiv(200,200,50,50);
+
+        }
+
+        var x_valueball1 = x_value;
+        var y_valueball1 = y_value;
+        var x_valueball2 = x_value;
+        var y_valueball2 = y_value;
+        var x_valueball3 = x_value;
+        var y_valueball3 = y_value;
+
+        var x_move1ball1 = x_move1;
+        var y_move1ball1 = y_move1;
+        var x_move1ball2 = x_move1;
+        var y_move1ball2 = y_move1;
+        var x_move1ball3 = x_move1;
+        var y_move1ball3 = y_move1;
+
+        function move() {
+//ball1
+            x_value += x_move1;
+            y_value += y_move1;
+
+            if (x_value > 490) {
+                x_move1 = -x_move1;
+            }
+            if (x_value < 0) {
+                x_move1 = -x_move1;
+            }
+
+            if (y_value > 490) {
+                y_move1 = -y_move1;
+            }
+            if (y_value < 0) {
+                y_move1 = -y_move1;
+            }
+
+            //document.getElementById("div1").innerhtml=x_value+","+y_value;
+
+            if (Math.floor(x_value / 80) < xsize && Math.floor(y_value / 30) < ysize) {
+                Tx = Math.floor(x_value / 80);
+                if (Tx < 0) Tx = 0;
+                Ty = Math.floor(y_value / 30);
+                if (document.getElementById("B" + Tx + Ty).style.visibility == "visible") {
+                    y_move1 = -y_move1;
+                    Hits[Tx][Ty]++;
+                    document.getElementById("B" + Tx + Ty).style.visibility = "hidden";
+                }
+
+            }
+
+            if (Math.abs((parseInt(document.getElementById("div1").style.left) + 50) - (x_value + 5)) < 50 && y_value >
+                440) {
+                y_move1 = -y_move1;
+                if (x_move1 > 0)
+                    x_move1 = Math.abs((parseInt(document.getElementById("div1").style.left) + 50) - (x_value + 5)) /
+                    10;
+                else
+                    x_move1 = -Math.abs((parseInt(document.getElementById("div1").style.left) + 50) - (x_value + 5)) /
+                    10;
+                y_value = 440;
+            }
+
+            document.getElementById('ball1').style.left = x_value;
+            document.getElementById('ball1').style.top = y_value;
+
+//ball2
+            x_valueball2 += x_move1ball2;
+            y_valueball2 += y_move1ball2;
+
+            if (x_valueball2 > 490) {
+                x_move1ball2 = -x_move1ball2;
+            }
+            if (x_valueball2 < 0) {
+                x_move1ball2 = -x_move1ball2;
+            }
+
+            if (y_valueball2 > 490) {
+                y_move1ball2 = -y_move1ball2;
+            }
+            if (y_valueball2 < 0) {
+                y_move1ball2 = -y_move1ball2;
+            }
+
+            //document.getElementById("div1").innerhtml=x_value+","+y_value;
+
+            if (Math.floor(x_valueball2 / 80) < xsize && Math.floor(y_valueball2 / 30) < ysize) {
+                Tx = Math.floor(x_valueball2 / 80);
+                if (Tx < 0) Tx = 0;
+                Ty = Math.floor(y_valueball2 / 30);
+                if (document.getElementById("B" + Tx + Ty).style.visibility == "visible") {
+                    y_move1ball2 = -y_move1ball2;
+                    Hits[Tx][Ty]++;
+                    document.getElementById("B" + Tx + Ty).style.visibility = "hidden";
+                }
+
+            }
+
+            if (Math.abs((parseInt(document.getElementById("div1").style.left) + 50) - (x_valueball2 + 5)) < 50 && y_valueball2 >
+                440) {
+                y_move1ball2 = -y_move1ball2;
+                if (x_move1ball2 > 0)
+                    x_move1ball2 = Math.abs((parseInt(document.getElementById("div1").style.left) + 50) - (x_valueball2 + 5)) /
+                    10;
+                else
+                    x_move1ball2 = -Math.abs((parseInt(document.getElementById("div1").style.left) + 50) - (x_valueball2 + 5)) /
+                    10;
+                y_valueball2 = 440;
+            }
+
+            document.getElementById('ball2').style.left = x_valueball2;
+            document.getElementById('ball2').style.top = y_valueball2;
+
+//ball3
+            x_valueball3 += x_move1ball3;
+            y_valueball3 += y_move1ball3;
+
+            if (x_valueball3 > 490) {
+                x_move1ball3 = -x_move1ball3;
+            }
+            if (x_valueball3 < 0) {
+                x_move1ball3 = -x_move1ball3;
+            }
+
+            if (y_valueball3 > 490) {
+                y_move1ball3 = -y_move1ball3;
+            }
+            if (y_valueball3 < 0) {
+                y_move1ball3 = -y_move1ball3;
+            }
+
+            //document.getElementById("div1").innerhtml=x_value+","+y_value;
+
+            if (Math.floor(x_valueball3 / 80) < xsize && Math.floor(y_valueball3 / 30) < ysize) {
+                Tx = Math.floor(x_valueball3 /80);
+                if (Tx < 0) Tx = 0;
+                Ty = Math.floor(y_valueball3 / 30);
+                if (document.getElementById("B" + Tx + Ty).style.visibility == "visible") {
+                    y_move1ball3 = -y_move1ball3;
+                    Hits[Tx][Ty]++;
+                    document.getElementById("B" + Tx + Ty).style.visibility = "hidden";
+                }
+
+            }
+
+            if (Math.abs((parseInt(document.getElementById("div1").style.left) + 50) - (x_valueball3 + 5)) < 50 && y_valueball3 >
+                440) {
+                y_move1ball3 = -y_move1ball3;
+                if (x_move1ball3 > 0)
+                    x_move1ball3 = Math.abs((parseInt(document.getElementById("div1").style.left) + 50) - (x_valueball3 + 5)) /
+                    10;
+                else
+                    x_move1ball3 = -Math.abs((parseInt(document.getElementById("div1").style.left) + 50) - (x_valueball3 + 5)) /
+                    10;
+                y_valueball3 = 440;
+            }
+
+            document.getElementById('ball3').style.left = x_valueball3;
+            document.getElementById('ball3').style.top = y_valueball3;
+
+        }
+
+        function init() {
+
+            getdiv("frame1", 0, 0, 500, 500, "blue");
+            getdiv("div1", 100, 450, 100, 20, "red");
+            getdiv("ball1", 200, 200, 10, 10, "yellow");
+            getdiv("ball2", 200, 200, 10, 10, "yellow");
+            getdiv("ball3", 200, 200, 10, 10, "yellow");
+
+            for (x = 0; x < xsize; x++) {
+                for (y = 0; y < ysize; y++) {
+                    Hits[x][y] = 0;
+                    getdiv("B" + x + y, x * 83, y * 30, 80, 28, "yellow");//modfied
+
+                }
+            }
+
+
+            document.onmousemove = handleClick;
+
+            run1 = window.setInterval("move()", 12);
+        }
+    </script>
+
+</head>
+
+<body onload=init();>
+
+
+</body>
+
+</html>
+

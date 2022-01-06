@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <div>Click the button to create a P element with some text, and append it to the document's body.</div>
+    <div id="real23"></div>
+    <button onclick="add1()">add</button>
+    <button onclick="delete1()">delete</button>
+
+    <script>
+        var count = 1;
+
+        function add1() {
+            var x = document.createElement("p");
+            x.id = ""+count;
+            var t = document.createTextNode("line "+x.id+"");
+            x.appendChild(t);
+            document.getElementById("real23").appendChild(x);
+            count++;
+        }
+
+        function delete1() {
+            var id1 = ""+count - 1;
+            var d = document.getElementById(id1);
+            d.remove();
+            count--;
+        }
+
+        add1();
+        add1();
+        add1();
+        add1();
+        add1();
+    </script>
+
+</body>
+
+</html>
