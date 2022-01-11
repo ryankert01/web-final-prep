@@ -1,0 +1,177 @@
+
+<html>
+    <head>
+    <title>elements</title>
+    </head>
+    <script language="javascript"> 
+     
+    var turn = 0;
+    var size =5;
+    var a = new Array(size);
+    for(var i = 0; i < size; i++)
+        a[i] = new Array(size);
+    function put(event){
+        if ((typeof event == "undefined")||(!event))
+            event = window.event;
+        var e1 = event.target || event.srcElement;
+     
+        var x = e1.id.substring(0, 1);
+        var y = e1.id.substring(1, 2);
+        
+
+            var y1,y2,x1,x2;
+            y1=eval(y)+1;
+            if (y1<5) { 
+                var id2= ""+x+y1;
+                var e2 = document.getElementById(id2);
+                if (e2.name == "  ") {
+                    e2.name = e1.name;
+                    e1.name = "  ";
+                    e2.bgColor = "#eeeeee";
+                    e1.innerHTML = e1.name;
+                    e2.innerHTML = e2.name;		
+                }
+            }
+            y1=eval(y)-1;
+            if (y1>=0) { 
+                var id2= ""+x+y1;
+                var e2 = document.getElementById(id2);
+                if (e2.name == "  ") {
+                    e2.name = e1.name;
+                    e1.name = "  ";
+                    e2.bgColor = "#eeeeee";
+                    e1.innerHTML = e1.name;
+                    e2.innerHTML = e2.name;		
+                }
+            }
+            x1=eval(x)+1;
+            if (x1<5) { 
+                var id2= ""+x1+y;
+                var e2 = document.getElementById(id2);
+                if (e2.name == "  ") {
+                    e2.name = e1.name;
+                    e1.name = "  ";
+                    e2.bgColor = "#eeeeee";
+                    e1.innerHTML = e1.name;
+                    e2.innerHTML = e2.name;		
+                }
+            }
+            x1=eval(x)-1;
+            if (x1>=0) { 
+                var id2= ""+x1+y;
+                var e2 = document.getElementById(id2);
+                if (e2.name == "  ") {
+                    e2.name = e1.name;
+                    e1.name = "  ";
+                    e2.bgColor = "#eeeeee";
+                    e1.innerHTML = e1.name;
+                    e2.innerHTML = e2.name;		
+                }
+            }	
+    
+        var check=1;
+        var num=1;
+        for(x=0;x<size;x++){
+            for(y=0;y<size;y++){// || (x==4 && y==4)
+                if((x==0 && y==4) || (x==4 && y==0)){
+                    var id2= ""+x+y;
+                    var e2 = document.getElementById(id2);
+                    if(e2.name!="  ")
+                        check=2;
+                    num++;
+                }
+                else{
+                    var id2= ""+x+y;
+                    var e2 = document.getElementById(id2);
+                    if(e2.name!=num)
+                        check=2;
+                    num++;
+                }
+            }
+        }
+        if(check==1)
+            document.getElementById('t1').innerHTML="You Win!";
+        else
+            document.getElementById('t1').innerHTML="";
+    }
+    
+    function init(){
+        var table = document.createElement("TABLE");
+        document.body.appendChild(table);
+        table.border = "2";
+        table.cellSpacing = "2";
+        table.bgColor = "#eeeeee";
+        table.align="center";	
+       
+        var x, y, num1=1;
+       
+        for(x=0;x<size;x++){
+            r = table.insertRow(x);
+            for(y=0;y<size;y++){
+                c = r.insertCell(y);
+                c.width="50";
+                c.height="50";
+                c.id = ""+x+y;
+                if(x==0 && y==4){
+                    c.name="  ";
+                    // c.bgColor = "#ffffff";
+                }
+                else if(x==4 && y==0){
+                    c.name="  ";
+                    // c.bgColor = "#ffffff";
+                }
+                // else if(x==4 && y==4){
+                //     c.name="  ";
+                // }
+                else{
+                    c.name=num1;
+                    num1++;
+                }	
+                c.vAlign="center";
+                c.align="center";
+                c.onclick = put;
+                c.appendChild(document.createTextNode(c.name));	
+            }
+        }
+        var times=0;
+        var my_div = null;///////////////////
+        var newDiv = null;////////////////////	
+        var lx=3,ly=3;
+        var bid;
+        var block;
+        while(times<20){
+            bid= ""+lx+ly;
+            block=document.getElementById(bid);
+            var r= Math.floor(Math.random()*10)%4;
+            var tx=lx;
+            var ty=ly;
+            if(r==0){tx--;}
+            else if(r==1){ty--;}
+            else if(r==2){tx++;}
+            else if(r==3){ty++;}
+            if(tx==0 && ty==3){}
+            else if(tx==4 && ty==0){}
+            else if(tx>=0 && tx<5 && ty>=0 && ty<5){
+                lx=tx;
+                ly=ty;
+                var cid=""+tx+ty;
+                var change= document.getElementById(cid);
+                block.name=change.name;
+                change.name="  ";
+                block.innerHTML = block.name;
+                change.innerHTML = change.name;
+                block.innerHTML = block.name;
+                change.innerHTML = change.name;		
+                times++;
+            }
+        }
+    }
+    </script>
+     
+    <body onLoad="init()">
+    <div id=t1 style="position:absolute;border-width:5;border-style:double;top:10;left:150;font-size:50px"></div>
+    
+    </body>
+    </html>
+    
+    
